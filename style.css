@@ -941,3 +941,74 @@ pre code {
     right: 0.55rem;
   }
 }
+
+/* ===== Paper-style caption alignment ===== */
+
+.paper-caption-box {
+  margin-top: 1.25rem;
+}
+
+.paper-caption-grid {
+  display: grid;
+  align-items: start;
+  gap: 1.6rem;
+}
+
+.teaser-caption-layout {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.method-caption-layout {
+  grid-template-columns: 0.9fr 1.6fr;
+  gap: 1.35rem 1.8rem;
+}
+
+.method-caption-left {
+  grid-row: span 2;
+}
+
+.paper-caption-item {
+  text-align: left;
+}
+
+.paper-caption-item h3 {
+  margin: 0 0 0.55rem 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #222;
+}
+
+.paper-caption-item p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: #555;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.paper-caption-item b {
+  color: #222;
+  font-weight: 700;
+}
+
+.paper-caption-item i {
+  font-style: italic;
+}
+
+/* Mobile layout */
+@media screen and (max-width: 768px) {
+  .teaser-caption-layout,
+  .method-caption-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .method-caption-left {
+    grid-row: auto;
+  }
+
+  .paper-caption-item p {
+    text-align: left;
+  }
+}
