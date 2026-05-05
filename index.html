@@ -131,28 +131,29 @@
             <img src="assets/pasa_teaser.png" alt="PASA Teaser" class="teaser-image refined-teaser-image">
           </div>
 
-          <div class="teaser-caption-box">
-            <div class="teaser-caption-grid">
-
-              <div class="caption-item">
-                <h3>Left: Semantic-Level Watermarking</h3>
+          <div class="teaser-caption-box paper-caption-box">
+            <div class="teaser-caption-grid paper-caption-grid teaser-caption-layout">
+          
+              <div class="caption-item paper-caption-item">
+                <h3>Left: Illustration of PASA</h3>
                 <p>
-                  PASA is a principled watermarking approach operating in the latent embedding
-                  space over semantic clusters. By anchoring shared randomness to semantic
-                  clusters via a secret key, PASA remains robust against semantic-invariant
-                  attacks such as paraphrasing while ensuring distortion-free generation.
+                  <b>PASA</b> is a principled watermarking approach operating in the latent
+                  embedding space over semantic clusters. By anchoring <b>shared randomness</b>
+                  to semantic clusters via a secret key, PASA remains robust against
+                  <b>semantic-invariant attacks</b>, such as paraphrasing, while ensuring
+                  <b>distortion-free</b> generation.
                 </p>
               </div>
-
-              <div class="caption-item">
+          
+              <div class="caption-item paper-caption-item">
                 <h3>Right: Robustness under Paraphrasing</h3>
                 <p>
-                  Quantitative results show that PASA outperforms standard vocabulary-space
-                  watermarking baselines across varying paraphrase strengths, achieving stronger
-                  robustness in both AUC-ROC and TPR@1%FPR.
+                  Quantitative results demonstrate that PASA outperforms standard
+                  vocabulary-space watermarking baselines across varying paraphrase
+                  strengths in both <b>AUC-ROC</b> and <b>TPR@1%FPR</b>.
                 </p>
               </div>
-
+          
             </div>
           </div>
 
@@ -219,18 +220,18 @@
           <img src="assets/pasa_method.png" alt="PASA Method Overview" class="method-image">
         </div>
 
-        <div class="method-caption-box">
-          <div class="method-caption-grid">
-
-            <div class="method-caption-item">
+        <div class="method-caption-box paper-caption-box">
+          <div class="method-caption-grid paper-caption-grid method-caption-layout">
+        
+            <div class="method-caption-item paper-caption-item method-caption-left">
               <h3>Left: Semantic Mapping</h3>
               <p>
-                PASA first constructs a semantic mapping function <i>f</i> that partitions the
-                latent token embedding space into <i>K</i> semantic clusters.
+                PASA first constructs a semantic mapping function <i>f</i>, which partitions
+                the latent token embedding space into <i>K</i> semantic clusters.
               </p>
             </div>
-
-            <div class="method-caption-item">
+        
+            <div class="method-caption-item paper-caption-item">
               <h3>Top: Generation</h3>
               <p>
                 At each step <i>t</i>, the next-token prediction distribution
@@ -245,18 +246,18 @@
                 <i>x<sub>t</sub></i> within the selected semantic cluster.
               </p>
             </div>
-
-            <div class="method-caption-item">
+        
+            <div class="method-caption-item paper-caption-item">
               <h3>Bottom: Detection</h3>
               <p>
-                For a potentially modified observed token sequence, the detector approximates
-                the generation distribution through a surrogate small language model. The
-                detection score accumulates based on the alignment between the resampled
-                <i>ζ<sub>t</sub></i> and the observed semantic cluster
-                <i>f(x<sub>t</sub>)</i>.
+                For a potentially modified observed token sequence, the detector
+                approximates the generation distribution through a surrogate small
+                language model. The detection score accumulates based on the alignment
+                between the resampled <i>ζ<sub>t</sub></i> and the observed semantic
+                cluster <i>f(x<sub>t</sub>)</i>.
               </p>
             </div>
-
+        
           </div>
         </div>
 
