@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <meta
+    name="description"
+    content="PASA: A Principled Embedding-Space Watermarking Approach for LLM-Generated Text under Semantic-Invariant Attacks."
+  >
+  <meta
+    name="keywords"
+    content="PASA, LLM Watermarking, Semantic-Invariant Attacks, ICML 2026"
+  >
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>PASA | ICML 2026</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- Title / Author / Buttons -->
+<section class="hero hero-custom">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+
+          <div class="venue-badge">
+            <span>ICML 2026</span>
+          </div>
+
+          <h1 class="title is-1 publication-title refined-title">
+            PASA: A Principled Embedding-Space Watermarking Approach for
+            LLM-Generated Text under Semantic-Invariant Attacks
+          </h1>
+
+          <div class="publication-meta">
+
+            <div class="is-size-5 publication-authors refined-authors">
+              <span class="author-block">
+                <a href="#" target="_blank">Zhenxin Ai</a><sup>1</sup>
+              </span>
+              <span class="author-sep">,</span>
+              <span class="author-block">
+                <a href="#" target="_blank">Haiyun He</a><sup>1*</sup>
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors publication-affiliation refined-affiliation">
+              <span class="author-block">
+                <sup>1</sup>The Hong Kong University of Science and Technology (Guangzhou)
+              </span>
+            </div>
+
+            <div class="is-size-6 publication-authors corresponding-author refined-corresponding">
+              <span class="author-block">
+                <sup>*</sup>Corresponding author
+              </span>
+            </div>
+
+          </div>
+
+          <div class="logo-row refined-logo-row">
+            <img src="assets/hkust-gz-logo.png" alt="HKUST(GZ) Logo" class="school-logo">
+          </div>
+
+          <div class="publication-links refined-links">
+
+            <span class="link-block">
+              <a href="#" target="_blank" class="external-link button is-normal is-rounded is-dark refined-button">
+                <span class="icon">
+                  <i class="fas fa-file-pdf"></i>
+                </span>
+                <span>Paper</span>
+              </a>
+            </span>
+
+            <span class="link-block">
+              <a href="#" target="_blank" class="external-link button is-normal is-rounded is-dark refined-button">
+                <span class="icon">
+                  <i class="ai ai-arxiv"></i>
+                </span>
+                <span>arXiv</span>
+              </a>
+            </span>
+
+            <span class="link-block">
+              <a href="#" target="_blank" class="external-link button is-normal is-rounded is-dark refined-button">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+              </a>
+            </span>
+
+            <span class="link-block">
+              <a href="#bibtex" class="external-link button is-normal is-rounded is-dark refined-button">
+                <span class="icon">
+                  <i class="fas fa-quote-right"></i>
+                </span>
+                <span>BibTeX</span>
+              </a>
+            </span>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Teaser -->
+<section class="section teaser-section refined-teaser-section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+
+        <div class="teaser-card">
+
+          <div class="has-text-centered">
+            <img src="assets/pasa_teaser.png" alt="PASA Teaser" class="teaser-image refined-teaser-image">
+          </div>
+
+          <div class="teaser-caption-box">
+            <div class="teaser-caption-grid">
+
+              <div class="caption-item">
+                <h3>Left: Semantic-Level Watermarking</h3>
+                <p>
+                  PASA is a principled watermarking approach operating in the latent embedding
+                  space over semantic clusters. By anchoring shared randomness to semantic
+                  clusters via a secret key, PASA remains robust against semantic-invariant
+                  attacks such as paraphrasing while ensuring distortion-free generation.
+                </p>
+              </div>
+
+              <div class="caption-item">
+                <h3>Right: Robustness under Paraphrasing</h3>
+                <p>
+                  Quantitative results show that PASA outperforms standard vocabulary-space
+                  watermarking baselines across varying paraphrase strengths, achieving stronger
+                  robustness in both AUROC and TPR@1%FPR.
+                </p>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Abstract -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+
+        <h2 class="title is-3">Abstract</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            Watermarking large language models (LLMs) has emerged as a promising approach for
+            identifying LLM-generated text and supporting responsible AI deployment. However,
+            existing watermarking methods are often vulnerable to semantic-invariant attacks,
+            such as paraphrasing, which can substantially weaken or remove watermark signals
+            while preserving the original meaning.
+          </p>
+
+          <p>
+            We propose <b>PASA</b>, a principled, robust, and distortion-free watermarking
+            algorithm that embeds and detects watermark signals at the semantic level. PASA
+            operates over semantic clusters in a latent embedding space and establishes a
+            distributional dependency between token sequences and auxiliary sequences through
+            shared randomness synchronized by a secret key and semantic history. This design is
+            grounded in our theoretical framework, which characterizes a jointly optimal
+            embedding-detection pair and captures the fundamental trade-offs among detection
+            accuracy, robustness, and distortion.
+          </p>
+
+          <p>
+            Extensive evaluations across multiple LLMs and semantic-invariant attacks demonstrate
+            that PASA remains robust even under strong paraphrasing attacks while preserving high
+            text quality. Compared with standard vocabulary-space watermarking baselines, PASA
+            achieves stronger robustness and detection performance. Ablation studies further
+            validate the effectiveness of our key design choices and hyperparameter settings.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Method -->
+<section class="section method-section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+
+        <h2 class="title is-3 has-text-centered">Overview of PASA</h2>
+
+        <div class="has-text-centered">
+          <img src="assets/pasa_method.png" alt="PASA Method Overview" class="method-image">
+        </div>
+
+        <div class="method-caption-box">
+          <div class="method-caption-grid">
+
+            <div class="method-caption-item">
+              <h3>Left: Semantic Mapping</h3>
+              <p>
+                PASA first constructs a semantic mapping function <i>f</i> that partitions the
+                latent token embedding space into <i>K</i> semantic clusters.
+              </p>
+            </div>
+
+            <div class="method-caption-item">
+              <h3>Top: Generation</h3>
+              <p>
+                At each step <i>t</i>, the next-token prediction distribution
+                <i>Q<sub>t</sub></i> is transformed into the cluster distribution
+                <i>Q<sup>f</sup><sub>t</sub></i>. The auxiliary distribution
+                <i>P<sub>ζ<sub>t</sub></sub></i> is truncated by a threshold
+                <i>α</i> and contains an overflow state <i>ζ̃</i> to ensure
+                false-alarm error control. Auxiliary sampling of <i>ζ<sub>t</sub></i>
+                uses a seed generated by a PRF with a secret key and <i>w</i>
+                semantic history as input. The sampled auxiliary random variable
+                <i>ζ<sub>t</sub></i> then guides the sampling of the next token
+                <i>x<sub>t</sub></i> within the selected semantic cluster.
+              </p>
+            </div>
+
+            <div class="method-caption-item">
+              <h3>Bottom: Detection</h3>
+              <p>
+                For a potentially modified observed token sequence, the detector approximates
+                the generation distribution through a surrogate small language model. The
+                detection score accumulates based on the alignment between the resampled
+                <i>ζ<sub>t</sub></i> and the observed semantic cluster
+                <i>f(x<sub>t</sub>)</i>.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Experiment Results -->
+<section class="section experiment-section" id="results">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+
+        <h2 class="title is-3 has-text-centered">Experiment Results</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            We evaluate PASA under standard detection settings and challenging semantic-invariant
+            attacks. The results show that PASA achieves robust detection while preserving text
+            quality and maintaining practical detection cost.
+          </p>
+        </div>
+
+        <div class="experiment-carousel">
+          <div class="experiment-carousel-stage">
+
+            <div class="experiment-slide is-active">
+              <img src="assets/exp_detection.png" alt="Detection Results" class="experiment-carousel-image">
+
+              <div class="experiment-caption">
+                <h3>Detection Performance</h3>
+                <p>
+                  Detection performance on clean text and under semantic-invariant token-replacement
+                  attacks. Comparisons of ROC-AUC, TPR@1%FPR, and TPR@10%FPR across Llama2-13B
+                  and Mistral-8×7B architectures. T5-Large and T5-XXL are used as attackers.
+                  Best, Second Best, and Third Best results are marked in each column.
+                </p>
+              </div>
+            </div>
+
+            <div class="experiment-slide">
+              <img src="assets/exp_robustness.png" alt="Robustness Results" class="experiment-carousel-image">
+
+              <div class="experiment-caption">
+                <h3>Robustness under Semantic-Invariant Attacks</h3>
+                <p>
+                  Detection performance under semantic-invariant paraphrasing attacks (DIPPER).
+                  Results are reported for three configurations with increasing structural
+                  perturbation (Order Diversity), ranging from Ord = 0 to Ord = 80, with fixed
+                  lexical diversity Lex = 60. Best, Second Best, and Third Best results are
+                  marked in each column.
+                </p>
+              </div>
+            </div>
+
+            <div class="experiment-slide">
+              <img src="assets/exp_ablation.png" alt="Ablation Results" class="experiment-carousel-image">
+
+              <div class="experiment-caption">
+                <h3>Ablation Study</h3>
+                <p>
+                  Ablation study on hyper-parameters. (a) Impact of semantic cluster granularity
+                  (K) on robustness across log-scale cluster counts. (b) Impact of synchronization
+                  window size (w) on robustness. The plots compare the baseline (Original) against
+                  T5-based token replacement attacks (r = 0.3, 0.5).
+                </p>
+              </div>
+            </div>
+
+            <div class="experiment-slide">
+              <img src="assets/exp_moreattack.png" alt="More Attack" class="experiment-carousel-image">
+
+              <div class="experiment-caption">
+                <h3>More Attack</h3>
+                <p>
+                  Additional robustness comparison under diverse paraphrasing attacks. Comparisons
+                  of ROC-AUC, TPR@1%FPR, and TPR@10%FPR under clean text and stronger paraphrasing
+                  attacks, including DIPPER, OPT-2.7B, and WM-removal. Best, Second Best, and Third
+                  Best results are marked when applicable.
+                </p>
+              </div>
+            </div>
+
+            <button class="carousel-button carousel-button-prev" type="button" aria-label="Previous result">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+
+            <button class="carousel-button carousel-button-next" type="button" aria-label="Next result">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+
+          </div>
+
+          <div class="carousel-dots" aria-label="Experiment result navigation">
+            <button class="carousel-dot is-active" type="button" data-slide="0" aria-label="Show detection results"></button>
+            <button class="carousel-dot" type="button" data-slide="1" aria-label="Show robustness results"></button>
+            <button class="carousel-dot" type="button" data-slide="2" aria-label="Show ablation results"></button>
+            <button class="carousel-dot" type="button" data-slide="3" aria-label="Show more attack results"></button>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Usage -->
+<section class="section usage-section" id="usage">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+
+        <h2 class="title is-3 has-text-centered">How to Use PASA?</h2>
+
+        <div class="content usage-content">
+          <p>
+            PASA provides a simple reproduction pipeline for generating watermarked text.
+            To reproduce the main experiment, follow these steps:
+          </p>
+
+          <ol class="usage-steps">
+
+            <li>
+              <p>Clone the PASA repository from GitHub.</p>
+
+              <div class="code-wrapper">
+                <button class="copy-button" data-copy-target="code-install-1">Copy</button>
+                <pre><code id="code-install-1">git clone https://github.com/ai-kunkun/PASA.git
+cd PASA</code></pre>
+              </div>
+            </li>
+
+            <li>
+              <p>Setup the conda environment and install dependencies.</p>
+
+              <div class="code-wrapper">
+                <button class="copy-button" data-copy-target="code-install-2">Copy</button>
+                <pre><code id="code-install-2">conda create -n pasa python=3.10 -y
+conda activate pasa
+
+pip install torch transformers accelerate datasets pandas tqdm nltk tokenizers
+python -c "import nltk; nltk.download('punkt')"</code></pre>
+              </div>
+            </li>
+
+            <li>
+              <p>
+                If you encounter any issues, please open an issue at
+                <a href="https://github.com/ai-kunkun/PASA/issues" target="_blank">PASA Issues</a>,
+                and we will assist you as soon as possible.
+              </p>
+            </li>
+
+          </ol>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- BibTeX -->
+<section class="section" id="bibtex">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+
+        <h2 class="title is-3 has-text-centered">BibTeX</h2>
+
+        <div class="content bibtex-content">
+          <p>
+            If you find our work helpful, please cite our paper:
+          </p>
+
+          <div class="code-wrapper bibtex-wrapper">
+            <button class="copy-button" data-copy-target="code-bibtex">Copy</button>
+            <pre><code id="code-bibtex">@inproceedings{ai2026pasa,
+  title     = {PASA: A Principled Embedding-Space Watermarking Approach for LLM-Generated Text under Semantic-Invariant Attacks},
+  author    = {Ai, Zhenxin and He, Haiyun},
+  booktitle = {Proceedings of the International Conference on Machine Learning},
+  year      = {2026}
+}</code></pre>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <p>
+        This website is borrowed from
+        <a href="https://github.com/nerfies/nerfies.github.io" target="_blank">nerfies</a>.
+      </p>
+      <p>
+        The Hong Kong University of Science and Technology (Guangzhou)
+      </p>
+    </div>
+  </div>
+</footer>
+
+
+<!-- Scripts -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const slides = document.querySelectorAll(".experiment-slide");
+    const dots = document.querySelectorAll(".carousel-dot");
+    const prevButton = document.querySelector(".carousel-button-prev");
+    const nextButton = document.querySelector(".carousel-button-next");
+    const copyButtons = document.querySelectorAll(".copy-button");
+
+    let currentSlide = 0;
+
+    function showSlide(index) {
+      if (!slides.length) return;
+
+      currentSlide = (index + slides.length) % slides.length;
+
+      slides.forEach((slide) => {
+        slide.classList.remove("is-active");
+      });
+
+      dots.forEach((dot) => {
+        dot.classList.remove("is-active");
+      });
+
+      slides[currentSlide].classList.add("is-active");
+
+      if (dots[currentSlide]) {
+        dots[currentSlide].classList.add("is-active");
+      }
+    }
+
+    if (prevButton && nextButton) {
+      prevButton.addEventListener("click", function () {
+        showSlide(currentSlide - 1);
+      });
+
+      nextButton.addEventListener("click", function () {
+        showSlide(currentSlide + 1);
+      });
+    }
+
+    dots.forEach((dot) => {
+      dot.addEventListener("click", function () {
+        const target = Number(dot.getAttribute("data-slide"));
+        showSlide(target);
+      });
+    });
+
+    copyButtons.forEach((button) => {
+      button.addEventListener("click", async function () {
+        const targetId = button.getAttribute("data-copy-target");
+        const codeBlock = document.getElementById(targetId);
+
+        if (!codeBlock) return;
+
+        const text = codeBlock.innerText;
+
+        try {
+          await navigator.clipboard.writeText(text);
+
+          const originalText = button.innerText;
+          button.innerText = "Copied";
+          button.classList.add("copied");
+
+          setTimeout(() => {
+            button.innerText = originalText;
+            button.classList.remove("copied");
+          }, 1500);
+        } catch (err) {
+          button.innerText = "Failed";
+
+          setTimeout(() => {
+            button.innerText = "Copy";
+          }, 1500);
+        }
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
